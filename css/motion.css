@@ -1,0 +1,174 @@
+/* Estado inicial de la secuencia de carga */
+html.js:not(.intro-done):not(.failsafe) [data-intro],
+html.js:not(.intro-done):not(.failsafe) [data-name] {
+  opacity: 0;
+}
+
+/* Las micro-animaciones solo corren si el cursor o el viewport activan el módulo */
+.tile__body:hover .viz *,
+.tile__body:focus-within .viz *,
+.tile.is-near .viz * {
+  animation-play-state: running;
+}
+
+.viz * {
+  animation-play-state: paused;
+}
+
+.off-arcs {
+  animation: off-fade 3.6s var(--ease) infinite;
+}
+
+.off-slash {
+  stroke-dasharray: 120;
+  animation: off-draw 3.6s var(--ease) infinite;
+}
+
+.off-queue rect {
+  transform-box: fill-box;
+  transform-origin: left;
+  animation: off-fill 3.6s var(--ease) infinite;
+}
+
+.off-queue rect:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.off-queue rect:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes off-fade {
+  0%, 12% { opacity: 1; }
+  30%, 100% { opacity: 0.28; }
+}
+
+@keyframes off-draw {
+  0%, 12% { stroke-dashoffset: 120; }
+  30%, 100% { stroke-dashoffset: 0; }
+}
+
+@keyframes off-fill {
+  0%, 25% { transform: scaleX(0.25); fill: rgb(87 227 220 / 0.22); }
+  70%, 100% { transform: scaleX(1); fill: rgb(87 227 220 / 0.6); }
+}
+
+.geo-pin {
+  offset-path: path("M14 112 C 80 60, 130 110, 170 62 S 270 30, 310 20");
+  animation: geo-move 5s ease-in-out infinite alternate;
+}
+
+@keyframes geo-move {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+.geo-fence {
+  animation: geo-dash 1.6s linear infinite;
+}
+
+@keyframes geo-dash {
+  to { stroke-dashoffset: -28; }
+}
+
+.gps-focus {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gps 2.2s var(--ease) infinite;
+}
+
+@keyframes gps {
+  0% { transform: scale(1.7); opacity: 0; }
+  45%, 100% { transform: scale(1); opacity: 1; }
+}
+
+.omr-scan {
+  animation: omr 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes omr {
+  from { transform: translateY(0); }
+  to { transform: translateY(118px); }
+}
+
+.lock-shade,
+.lock-icon {
+  opacity: 0;
+  animation: lock 3.2s steps(1) infinite;
+}
+
+@keyframes lock {
+  0%, 35% { opacity: 0; }
+  36%, 100% { opacity: 1; }
+}
+
+.tile__body:not(:hover):not(:focus-within) .lock-shade {
+  opacity: 0;
+}
+
+.tile__body:not(:hover):not(:focus-within) .lock-icon {
+  opacity: 1;
+}
+
+.bell-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: bell 2.2s ease-out infinite;
+}
+
+.bell-ring--2 {
+  animation-delay: 0.7s;
+}
+
+@keyframes bell {
+  from { transform: scale(0.7); opacity: 0.9; }
+  to { transform: scale(2.5); opacity: 0; }
+}
+
+.cam-iris {
+  transform-origin: 70px 54px;
+  animation: iris 5s linear infinite;
+}
+
+@keyframes iris {
+  to { transform: rotate(360deg); }
+}
+
+.game-keys circle {
+  animation: keys 2s steps(1) infinite;
+}
+
+.game-keys circle:nth-child(2) { animation-delay: 0.5s; }
+.game-keys circle:nth-child(3) { animation-delay: 1s; }
+.game-keys circle:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes keys {
+  0%, 24% { fill: var(--sun); stroke: var(--sun); }
+  25%, 100% { fill: transparent; stroke: currentColor; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .lock-icon {
+    opacity: 1;
+  }
+
+  .geo-pin {
+    offset-distance: 45%;
+  }
+
+  .bell-ring {
+    opacity: 0.5;
+  }
+}

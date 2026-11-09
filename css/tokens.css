@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Mona Sans";
+  src: url("../fonts/mona-sans.woff2") format("woff2");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/jetbrains-mono.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  --ink: #050914;
+  --navy: #0b1a35;
+  --cyan: #57e3dc;
+  --sun: #f4b860;
+  --paper: #eef3f9;
+  --mute: #a3b1c4;
+  --line: rgb(160 200 225 / 0.16);
+  --glass: rgb(12 26 52 / 0.58);
+
+  --sans: "Mona Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  --gutter: clamp(16px, 4vw, 64px);
+  --max: 1320px;
+  --section: clamp(96px, 15vw, 200px);
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
